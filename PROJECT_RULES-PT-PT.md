@@ -1,299 +1,364 @@
-# PROJECT_RULES.md
+# AGENT.md
 
-> Menos código. Mais impacto.
-
-## Missão
-
-Construir software simples, sustentável e fácil de evoluir.
-
-O objetivo não é escrever mais código.
-
-O objetivo é resolver problemas com a menor complexidade possível.
+> Good software starts long before the first line of code.
 
 ---
 
-# Mentalidade
+# Mission
 
-Antes de implementar qualquer solução:
+Your objective is **not** to generate as much code as possible.
 
-* Entenda o problema.
-* Entenda o contexto.
-* Entenda as regras de negócio.
-* Entenda a arquitetura existente.
+Your objective is to make the best engineering decision possible.
 
-Nunca comece codificando.
+Optimize for:
 
-Comece entendendo.
+* Simplicity
+* Correctness
+* Maintainability
+* Readability
+* Security
+* Long-term sustainability
 
----
+Never optimize for:
 
-# Ordem de Decisão
+* Number of files
+* Number of classes
+* Cleverness
+* Abstractions
+* Premature optimization
+* "Looks more professional"
 
-Antes de criar algo novo siga esta ordem:
-
-1. Isso realmente precisa existir?
-2. Já existe no projeto?
-3. Posso reutilizar algo existente?
-4. A linguagem já resolve?
-5. O framework já resolve?
-6. Uma dependência já resolve?
-7. Dá para simplificar?
-8. Só então implemente.
+Software quality is determined before implementation begins.
 
 ---
 
-# Reutilização
+# Development Lifecycle
 
-Prefira sempre:
+Every task follows this order.
 
-* Reutilizar
-* Adaptar
-* Estender
-
-Antes de:
-
-* Criar
-* Duplicar
-* Reescrever
-
----
-
-# Dependências
-
-Cada dependência adiciona:
-
-* Custo
-* Complexidade
-* Risco
-* Manutenção
-
-Antes de instalar uma dependência pergunte:
-
-> Posso resolver isso sem ela?
-
----
-
-# YAGNI
-
-You Aren't Gonna Need It.
-
-Não implemente:
-
-* Funcionalidades futuras
-* Abstrações especulativas
-* Sistemas genéricos sem necessidade real
-* Otimizações prematuras
-
-Construa apenas o necessário.
-
----
-
-# KISS
-
-Keep It Simple.
-
-Prefira:
-
-* Código explícito
-* Fluxos simples
-* Estruturas pequenas
-* Componentes previsíveis
-
-Evite:
-
-* Camadas desnecessárias
-* Abstrações excessivas
-* Complexidade acidental
-
----
-
-# Funções
-
-Toda função deve:
-
-* Ter uma responsabilidade clara
-* Ser fácil de entender
-* Ser fácil de testar
-
-Se estiver difícil de explicar, provavelmente está complexa demais.
-
----
-
-# Nomenclatura
-
-Nomes devem revelar intenção.
-
-Ruim:
-
-```js
-a()
-b()
-data2()
+```
+Understand
+    ↓
+Validate
+    ↓
+Decide
+    ↓
+Reuse
+    ↓
+Simplify
+    ↓
+Implement
+    ↓
+Verify
+    ↓
+Document
+    ↓
+Review
 ```
 
-Bom:
-
-```js
-calculateInvoice()
-getUserProfile()
-sendNotification()
-```
+Never skip steps.
 
 ---
 
-# Comentários
+# Step 1 — Understand
 
-Não explique código óbvio.
+Before making **any** change:
 
-Comente apenas:
+Understand:
 
-* Regras de negócio
-* Decisões arquiteturais
-* Restrições importantes
-* Workarounds temporários
+* the problem
+* the business goal
+* the existing architecture
+* affected files
+* existing patterns
+* constraints
 
----
+Never assume.
 
-# Segurança
-
-Nunca confie na entrada do usuário.
-
-Valide sempre:
-
-* Inputs
-* APIs
-* Arquivos
-* Parâmetros
-* Dados externos
-
-Segurança não é opcional.
+Ask questions if necessary.
 
 ---
 
-# Acessibilidade
+# Step 2 — Validate
 
-Toda interface deve considerar:
+Confirm that the problem actually exists.
 
-* Navegação por teclado
-* Leitores de tela
-* Contraste adequado
-* Labels corretos
+Never solve hypothetical problems.
 
-Acessibilidade faz parte da qualidade.
+Never optimize without evidence.
+
+Never abstract for future possibilities.
+
+Evidence beats assumptions.
+
+---
+
+# Step 3 — Decision Ladder
+
+Before creating something new, stop at the first rule that solves the problem.
+
+1. Does this need to exist?
+2. Can it be removed?
+3. Can existing code be reused?
+4. Can existing architecture solve it?
+5. Can the language solve it?
+6. Can the framework solve it?
+7. Can an installed dependency solve it?
+8. Can it be simplified?
+9. Only then implement the minimum solution.
+
+Never skip steps.
+
+---
+
+# Simplicity
+
+Prefer:
+
+* explicit code
+* readable code
+* boring code
+* predictable behavior
+
+Avoid:
+
+* clever code
+* magic
+* unnecessary abstractions
+* hidden behavior
+
+Simple beats smart.
+
+---
+
+# Architecture
+
+Architecture should emerge from complexity.
+
+Never create architecture anticipating complexity.
+
+Don't create:
+
+* repositories
+* services
+* factories
+* builders
+* adapters
+* interfaces
+* DTOs
+
+unless they solve an existing problem.
+
+---
+
+# Dependencies
+
+Every dependency has a permanent cost.
+
+Before installing one ask:
+
+* Can the standard library solve it?
+* Can existing code solve it?
+* Is this dependency worth maintaining for years?
+
+Prefer removing dependencies.
+
+---
+
+# Reuse
+
+Always prefer:
+
+Reuse
+
+↓
+
+Adapt
+
+↓
+
+Extend
+
+↓
+
+Create
+
+Creation is the last option.
+
+---
+
+# Deletion First
+
+The best refactoring is often deletion.
+
+Whenever possible:
+
+* remove
+* simplify
+* merge
+* consolidate
+
+Instead of:
+
+* adding
+* duplicating
+* expanding
+
+Every line has a maintenance cost.
+
+---
+
+# Evidence-Based Engineering
+
+Never optimize because you think.
+
+Optimize because you measured.
+
+Never abstract because you might need.
+
+Abstract because you already needed it twice.
+
+Never redesign because it looks cleaner.
+
+Redesign because the current solution became insufficient.
+
+---
+
+# Naming
+
+Names should explain intent.
+
+Good names eliminate comments.
+
+---
+
+# Comments
+
+Do not explain code.
+
+Explain decisions.
+
+Comment:
+
+* business rules
+* architectural decisions
+* temporary workarounds
+* technical debt
+
+Never comment obvious code.
+
+---
+
+# Security
+
+Never trust external input.
+
+Always validate:
+
+* user input
+* API payloads
+* uploaded files
+* external systems
+
+Security is mandatory.
+
+---
+
+# Accessibility
+
+Accessibility is part of quality.
+
+Every UI should support:
+
+* keyboard navigation
+* screen readers
+* proper labels
+* sufficient contrast
 
 ---
 
 # Performance
 
-Não otimize por suposição.
+Measure first.
 
-Primeiro:
+Optimize second.
 
-* Meça
-* Identifique gargalos
-* Comprove o problema
-
-Depois:
-
-* Otimize
+Never optimize based on assumptions.
 
 ---
 
-# Banco de Dados
+# Testing
 
-Antes de criar:
+Critical logic must prove itself.
 
-* Tabelas
-* Colunas
-* Índices
+For non-trivial logic leave one runnable verification:
 
-Verifique se algo existente pode ser reutilizado.
+* assertion
+* demo
+* self-check
+* unit test
 
-Evite duplicação.
-
----
-
-# APIs
-
-APIs devem ser:
-
-* Consistentes
-* Previsíveis
-* Versionáveis
-* Bem documentadas
-
-Não quebre consumidores sem motivo.
+The smallest possible verification is preferred.
 
 ---
 
-# Testes
+# Documentation
 
-Valide:
+Every important change should explain:
 
-* Fluxo principal
-* Casos de erro
-* Casos extremos
-* Regras de negócio
+* why
+* trade-offs
+* rejected alternatives
+* architectural impact
 
-Não assuma que funciona.
-
-Verifique.
+Future developers should understand the decision.
 
 ---
 
-# Documentação
+# Review Checklist
 
-Toda mudança relevante deve explicar:
+Before finishing ask:
 
-* O problema
-* A solução
-* O impacto
-* Dependências adicionadas
-* Mudanças arquiteturais
+✓ Does this solve the real problem?
 
----
+✓ Can code be removed?
 
-# Checklist Antes de Codificar
+✓ Can complexity be reduced?
 
-* Entendi o problema?
-* Entendi o contexto?
-* Entendi a arquitetura?
-* Isso realmente precisa existir?
-* Já existe algo semelhante?
-* Posso reutilizar?
-* Posso simplificar?
-* Posso evitar dependências?
+✓ Can files be merged?
 
-Se alguma resposta for "não sei":
+✓ Can dependencies be avoided?
 
-Pare.
+✓ Is this understandable in one minute?
 
-Investigue primeiro.
+✓ Would another senior developer write less?
+
+If yes,
+
+simplify again.
 
 ---
 
-# Checklist Antes de Finalizar
+# Golden Rules
 
-* Resolve o problema?
-* Está simples?
-* Está legível?
-* Está seguro?
-* Está acessível?
-* Está documentado?
-* Está fácil de manter?
+The best code is the code that never had to be written.
 
----
+The second best code is the code everyone understands.
 
-# Regra de Ouro
+The best architecture is the one that naturally emerged from real complexity.
 
-A melhor solução não é a que usa menos linhas.
+The best optimization is deleting unnecessary code.
 
-A melhor solução é a mais simples que resolve o problema corretamente e continua fácil de manter daqui a um ano.
+The best abstraction is the one you never needed.
 
 ---
 
-# Pergunta Final
+# Final Question
 
-Se você remover metade deste código, o sistema continua funcionando?
+If another experienced developer reads this in two years:
 
-Se sim, considere remover.
+Will they immediately understand why it exists?
+
+If not,
+
+improve the design before writing more code.
