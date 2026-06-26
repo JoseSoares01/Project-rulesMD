@@ -1,44 +1,167 @@
-# PROJECT_RULES.md
+# AGENT.md
 
-> Less Code. More Impact.
-
-## Mission
-
-Build software that is simple, sustainable, and easy to evolve.
-
-The goal is not to write more code.
-
-The goal is to solve problems with the least amount of complexity possible.
+> Good software starts long before the first line of code.
 
 ---
 
-# Mindset
+# Mission
 
-Before implementing any solution:
+Your objective is **not** to generate as much code as possible.
 
-* Understand the problem.
-* Understand the context.
-* Understand the business requirements.
-* Understand the existing architecture.
+Your objective is to make the best engineering decision possible.
 
-Never start by coding.
+Optimize for:
 
-Start by understanding.
+* Simplicity
+* Correctness
+* Maintainability
+* Readability
+* Security
+* Long-term sustainability
+
+Never optimize for:
+
+* Number of files
+* Number of classes
+* Cleverness
+* Abstractions
+* Premature optimization
+* "Looks more professional"
+
+Software quality is determined before implementation begins.
 
 ---
 
-# Decision Order
+# Development Lifecycle
 
-Before creating something new, follow this order:
+Every task follows this order.
 
-1. Does this really need to exist?
-2. Does it already exist in the project?
-3. Can I reuse an existing solution?
-4. Can the language solve it natively?
-5. Can the framework solve it natively?
-6. Can a dependency solve it?
-7. Can it be simplified?
-8. Only then implement it.
+```
+Understand
+    ↓
+Validate
+    ↓
+Decide
+    ↓
+Reuse
+    ↓
+Simplify
+    ↓
+Implement
+    ↓
+Verify
+    ↓
+Document
+    ↓
+Review
+```
+
+Never skip steps.
+
+---
+
+# Step 1 — Understand
+
+Before making **any** change:
+
+Understand:
+
+* the problem
+* the business goal
+* the existing architecture
+* affected files
+* existing patterns
+* constraints
+
+Never assume.
+
+Ask questions if necessary.
+
+---
+
+# Step 2 — Validate
+
+Confirm that the problem actually exists.
+
+Never solve hypothetical problems.
+
+Never optimize without evidence.
+
+Never abstract for future possibilities.
+
+Evidence beats assumptions.
+
+---
+
+# Step 3 — Decision Ladder
+
+Before creating something new, stop at the first rule that solves the problem.
+
+1. Does this need to exist?
+2. Can it be removed?
+3. Can existing code be reused?
+4. Can existing architecture solve it?
+5. Can the language solve it?
+6. Can the framework solve it?
+7. Can an installed dependency solve it?
+8. Can it be simplified?
+9. Only then implement the minimum solution.
+
+Never skip steps.
+
+---
+
+# Simplicity
+
+Prefer:
+
+* explicit code
+* readable code
+* boring code
+* predictable behavior
+
+Avoid:
+
+* clever code
+* magic
+* unnecessary abstractions
+* hidden behavior
+
+Simple beats smart.
+
+---
+
+# Architecture
+
+Architecture should emerge from complexity.
+
+Never create architecture anticipating complexity.
+
+Don't create:
+
+* repositories
+* services
+* factories
+* builders
+* adapters
+* interfaces
+* DTOs
+
+unless they solve an existing problem.
+
+---
+
+# Dependencies
+
+Every dependency has a permanent cost.
+
+Before installing one ask:
+
+* Can the standard library solve it?
+* Can existing code solve it?
+* Is this dependency worth maintaining for years?
+
+Prefer removing dependencies.
 
 ---
 
@@ -46,254 +169,196 @@ Before creating something new, follow this order:
 
 Always prefer:
 
-* Reuse
-* Adapt
-* Extend
+Reuse
 
-Before:
+↓
 
-* Creating
-* Duplicating
-* Rewriting
+Adapt
 
----
+↓
 
-# Dependencies
+Extend
 
-Every dependency adds:
+↓
 
-* Cost
-* Complexity
-* Risk
-* Maintenance
+Create
 
-Before installing a dependency, ask:
-
-> Can I solve this without it?
+Creation is the last option.
 
 ---
 
-# YAGNI
+# Deletion First
 
-You Aren't Gonna Need It.
+The best refactoring is often deletion.
 
-Do not implement:
+Whenever possible:
 
-* Future features
-* Speculative abstractions
-* Generic systems without a real need
-* Premature optimizations
+* remove
+* simplify
+* merge
+* consolidate
 
-Build only what is necessary.
+Instead of:
 
----
+* adding
+* duplicating
+* expanding
 
-# KISS
-
-Keep It Simple.
-
-Prefer:
-
-* Explicit code
-* Simple flows
-* Small structures
-* Predictable components
-
-Avoid:
-
-* Unnecessary layers
-* Excessive abstractions
-* Accidental complexity
+Every line has a maintenance cost.
 
 ---
 
-# Functions
+# Evidence-Based Engineering
 
-Every function should:
+Never optimize because you think.
 
-* Have a clear responsibility
-* Be easy to understand
-* Be easy to test
+Optimize because you measured.
 
-If it's difficult to explain, it's probably too complex.
+Never abstract because you might need.
+
+Abstract because you already needed it twice.
+
+Never redesign because it looks cleaner.
+
+Redesign because the current solution became insufficient.
 
 ---
 
 # Naming
 
-Names should reveal intent.
+Names should explain intent.
 
-Bad:
-
-```js
-a()
-b()
-data2()
-```
-
-Good:
-
-```js
-calculateInvoice()
-getUserProfile()
-sendNotification()
-```
+Good names eliminate comments.
 
 ---
 
 # Comments
 
-Do not explain obvious code.
+Do not explain code.
 
-Only comment:
+Explain decisions.
 
-* Business rules
-* Architectural decisions
-* Important constraints
-* Temporary workarounds
+Comment:
+
+* business rules
+* architectural decisions
+* temporary workarounds
+* technical debt
+
+Never comment obvious code.
 
 ---
 
 # Security
 
-Never trust user input.
+Never trust external input.
 
 Always validate:
 
-* Inputs
-* APIs
-* Files
-* Parameters
-* External data
+* user input
+* API payloads
+* uploaded files
+* external systems
 
-Security is not optional.
+Security is mandatory.
 
 ---
 
 # Accessibility
 
-Every interface should consider:
-
-* Keyboard navigation
-* Screen readers
-* Proper contrast
-* Correct labels
-
 Accessibility is part of quality.
+
+Every UI should support:
+
+* keyboard navigation
+* screen readers
+* proper labels
+* sufficient contrast
 
 ---
 
 # Performance
 
-Do not optimize based on assumptions.
+Measure first.
 
-First:
+Optimize second.
 
-* Measure
-* Identify bottlenecks
-* Prove the problem exists
-
-Then:
-
-* Optimize
-
----
-
-# Database
-
-Before creating:
-
-* Tables
-* Columns
-* Indexes
-
-Check whether existing structures can be reused.
-
-Avoid duplication.
-
----
-
-# APIs
-
-APIs should be:
-
-* Consistent
-* Predictable
-* Versionable
-* Well documented
-
-Do not break consumers without a valid reason.
+Never optimize based on assumptions.
 
 ---
 
 # Testing
 
-Validate:
+Critical logic must prove itself.
 
-* Main flow
-* Error scenarios
-* Edge cases
-* Business rules
+For non-trivial logic leave one runnable verification:
 
-Do not assume it works.
+* assertion
+* demo
+* self-check
+* unit test
 
-Verify it.
+The smallest possible verification is preferred.
 
 ---
 
 # Documentation
 
-Every significant change should explain:
+Every important change should explain:
 
-* The problem
-* The solution
-* The impact
-* Added dependencies
-* Architectural changes
+* why
+* trade-offs
+* rejected alternatives
+* architectural impact
 
----
-
-# Checklist Before Coding
-
-* Do I understand the problem?
-* Do I understand the context?
-* Do I understand the architecture?
-* Does this really need to exist?
-* Does something similar already exist?
-* Can I reuse it?
-* Can I simplify it?
-* Can I avoid dependencies?
-
-If any answer is "I don't know":
-
-Stop.
-
-Investigate first.
+Future developers should understand the decision.
 
 ---
 
-# Checklist Before Finishing
+# Review Checklist
 
-* Does it solve the problem?
-* Is it simple?
-* Is it readable?
-* Is it secure?
-* Is it accessible?
-* Is it documented?
-* Is it easy to maintain?
+Before finishing ask:
+
+✓ Does this solve the real problem?
+
+✓ Can code be removed?
+
+✓ Can complexity be reduced?
+
+✓ Can files be merged?
+
+✓ Can dependencies be avoided?
+
+✓ Is this understandable in one minute?
+
+✓ Would another senior developer write less?
+
+If yes,
+
+simplify again.
 
 ---
 
-# Golden Rule
+# Golden Rules
 
-The best solution is not the one with the fewest lines of code.
+The best code is the code that never had to be written.
 
-The best solution is the simplest one that solves the problem correctly and remains easy to maintain one year from now.
+The second best code is the code everyone understands.
+
+The best architecture is the one that naturally emerged from real complexity.
+
+The best optimization is deleting unnecessary code.
+
+The best abstraction is the one you never needed.
 
 ---
 
 # Final Question
 
-If you remove half of this code, does the system still work?
+If another experienced developer reads this in two years:
 
-If the answer is yes, consider removing it.
+Will they immediately understand why it exists?
+
+If not,
+
+improve the design before writing more code.
